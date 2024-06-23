@@ -1,1 +1,8 @@
-<p>join-game works!</p>
+<div class="container">
+  <button mat-button (click)="this.createGame()">Create Game</button>
+  <div>OR</div>
+  <div>
+    <input id="game-id" name="game-id" [(ngModel)]="gameIdInput" />
+    <button mat-button (click)="this.joinGame()">Join Game</button>
+  </div>
+</div>
