@@ -111,3 +111,30 @@ export class SpecialDice extends Dice {
   static override 4 = SpecialFace.CHOPSTICK;
   static override 5 = SpecialFace.CHOPSTICKS;
 }
+
+export class BagOfDice {
+  private dices: Dice[] = [];
+
+  constructor() {
+    for (let i = 0; i < 10; i++) {
+      this.dices.push(new AppetizerDice());
+    }
+    for (let i = 0; i < 6; i++) {
+      this.dices.push(new MakiDice());
+    }
+    for (let i = 0; i < 5; i++) {
+      this.dices.push(new NigiriDice());
+    }
+    for (let i = 0; i < 5; i++) {
+      this.dices.push(new SpecialDice());
+    }
+    for (let i = 0; i < 4; i++) {
+      this.dices.push(new PuddingDice());
+    }
+  }
+
+  takeDice() {
+    const index = Math.floor(Math.random() * this.dices.length);
+    return this.dices.splice(index, 1)[0];
+  }
+}
