@@ -27,7 +27,7 @@ class Dice {
   value: DiceValues | null = null;
   face: number | null = null;
   diceRoll() {
-    this.value = Math.floor(Math.random() * 5) as DiceValues;
+    this.value = Math.floor(Math.random() * 6) as DiceValues;
     this.face = Dice[this.value];
   }
 
