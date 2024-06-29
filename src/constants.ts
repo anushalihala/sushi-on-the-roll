@@ -1,10 +1,20 @@
-interface Dice<T> {
-  0: T;
-  1: T;
-  2: T;
-  3: T;
-  4: T;
-  5: T;
+import { exhaustAll } from 'rxjs';
+
+type DiceValues = 0 | 1 | 2 | 3 | 4 | 5;
+
+class Dice {
+  static 0: number;
+  static 1: number;
+  static 2: number;
+  static 3: number;
+  static 4: number;
+  static 5: number;
+  value: DiceValues | null = null;
+  face: number | null = null;
+  diceRoll() {
+    this.value = Math.floor(Math.random() * 5) as DiceValues;
+    this.face = Dice[this.value];
+  }
 }
 
 enum NigiriFace {
@@ -13,14 +23,14 @@ enum NigiriFace {
   SQUID,
 }
 
-export const NigiriDice: Dice<NigiriFace> = {
-  0: NigiriFace.EGG,
-  1: NigiriFace.EGG,
-  2: NigiriFace.SALMON,
-  3: NigiriFace.SALMON,
-  4: NigiriFace.SALMON,
-  5: NigiriFace.SQUID,
-};
+export class NigiriDice extends Dice {
+  static override 0 = NigiriFace.EGG;
+  static override 1 = NigiriFace.EGG;
+  static override 2 = NigiriFace.SALMON;
+  static override 3 = NigiriFace.SALMON;
+  static override 4 = NigiriFace.SALMON;
+  static override 5 = NigiriFace.SQUID;
+}
 
 enum PuddingFace {
   ONE,
@@ -28,14 +38,14 @@ enum PuddingFace {
   THREE,
 }
 
-export const PuddingDice: Dice<PuddingFace> = {
-  0: PuddingFace.ONE,
-  1: PuddingFace.ONE,
-  2: PuddingFace.TWO,
-  3: PuddingFace.TWO,
-  4: PuddingFace.THREE,
-  5: PuddingFace.THREE,
-};
+export class PuddingDice extends Dice {
+  static override 0 = PuddingFace.ONE;
+  static override 1 = PuddingFace.ONE;
+  static override 2 = PuddingFace.TWO;
+  static override 3 = PuddingFace.TWO;
+  static override 4 = PuddingFace.THREE;
+  static override 5 = PuddingFace.THREE;
+}
 
 enum AppetizerFace {
   DUMPLING,
@@ -43,14 +53,14 @@ enum AppetizerFace {
   SASHIMI,
 }
 
-export const AppetizerDice: Dice<AppetizerFace> = {
-  0: AppetizerFace.DUMPLING,
-  1: AppetizerFace.DUMPLING,
-  2: AppetizerFace.DUMPLING,
-  3: AppetizerFace.TEMPURA,
-  4: AppetizerFace.TEMPURA,
-  5: AppetizerFace.SASHIMI,
-};
+export class AppetizerDice extends Dice {
+  static override 0 = AppetizerFace.DUMPLING;
+  static override 1 = AppetizerFace.DUMPLING;
+  static override 2 = AppetizerFace.DUMPLING;
+  static override 3 = AppetizerFace.TEMPURA;
+  static override 4 = AppetizerFace.TEMPURA;
+  static override 5 = AppetizerFace.SASHIMI;
+}
 
 enum MakiFace {
   ONE,
@@ -58,14 +68,14 @@ enum MakiFace {
   THREE,
 }
 
-export const MakiDice: Dice<MakiFace> = {
-  0: MakiFace.ONE,
-  1: MakiFace.ONE,
-  2: MakiFace.TWO,
-  3: MakiFace.TWO,
-  4: MakiFace.THREE,
-  5: MakiFace.THREE,
-};
+export class MakiDice extends Dice {
+  static override 0 = MakiFace.ONE;
+  static override 1 = MakiFace.ONE;
+  static override 2 = MakiFace.TWO;
+  static override 3 = MakiFace.TWO;
+  static override 4 = MakiFace.THREE;
+  static override 5 = MakiFace.THREE;
+}
 
 enum SpecialFace {
   WASABI,
@@ -74,11 +84,11 @@ enum SpecialFace {
   CHOPSTICKS,
 }
 
-export const SpecialDice: Dice<SpecialFace> = {
-  0: SpecialFace.WASABI,
-  1: SpecialFace.WASABI,
-  2: SpecialFace.MENUS,
-  3: SpecialFace.MENUS,
-  4: SpecialFace.CHOPSTICK,
-  5: SpecialFace.CHOPSTICKS,
-};
+export class SpecialDice extends Dice {
+  static override 0 = SpecialFace.WASABI;
+  static override 1 = SpecialFace.WASABI;
+  static override 2 = SpecialFace.MENUS;
+  static override 3 = SpecialFace.MENUS;
+  static override 4 = SpecialFace.CHOPSTICK;
+  static override 5 = SpecialFace.CHOPSTICKS;
+}
