@@ -4,3 +4,13 @@ export enum GameStatus {
   FINISHED,
   ABORTED,
 }
+
+export interface GameData {
+  status: GameStatus;
+  playerCount: number;
+}
+
+export interface PlayerData {
+  startGame: boolean;
+  playerName: string;
+}

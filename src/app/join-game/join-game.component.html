@@ -1,8 +1,15 @@
 <div class="container">
+  @if(playerName == ""){
+  <div>
+    <input id="player-name" name="player-name" [(ngModel)]="inputPlayerName" />
+    <button mat-button (click)="this.setPlayerName()">Next</button>
+  </div>
+  } @else {
   <button mat-button (click)="this.createGame()">Create Game</button>
   <div>OR</div>
   <div>
     <input id="game-id" name="game-id" [(ngModel)]="gameIdInput" />
     <button mat-button (click)="this.joinGame()">Join Game</button>
   </div>
+  }
 </div>

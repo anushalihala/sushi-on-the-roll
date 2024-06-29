@@ -1,0 +1,27 @@
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face-icon {
+  font-size: 56px;
+}
+
+.icons-container {
+  margin-top: 24px;
+  display: flex;
+  gap: 24px;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

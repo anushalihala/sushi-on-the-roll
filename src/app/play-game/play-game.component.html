@@ -1,1 +1,21 @@
-<p>play-game works!</p>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+<div class="container">
+  <p>play-game works! {{ gameId }}</p>
+  <button mat-button (click)="this.startGame()">Start Game</button>
+  <div class="icons-container">
+    @for(player of playerData; track player ){
+    <div class="icon-container">
+      <div>{{ player.playerName }}</div>
+      <span class="material-symbols-outlined face-icon"> face </span>
+      @if(player.startGame){
+      <div>READY</div>
+      } @else {
+      <div>WAITING</div>
+      }
+    </div>
+    }
+  </div>
+</div>
