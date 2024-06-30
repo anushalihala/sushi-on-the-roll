@@ -45,14 +45,14 @@ div.container {
   width: 300px;
 }
 
-.player-container .trays {
+.trays {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
-.player-container .conveyor-belt {
+.conveyor-belt-container {
   width: 300px;
   height: 150px;
   border: 1px solid black;
@@ -61,7 +61,7 @@ div.container {
   background-size: cover;
 }
 
-.player-container .tray-outer {
+.tray-outer-container {
   width: 300px;
   height: 150px;
   background-color: black;
@@ -70,7 +70,7 @@ div.container {
   align-items: center;
 }
 
-.player-container .tray-outer .tray-inner {
+.tray-outer-container .tray-inner-container {
   background-color: rgb(143, 43, 43);
   border: 5px solid rgb(233, 62, 62);
   border-radius: 8px;
