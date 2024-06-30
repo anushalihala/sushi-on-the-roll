@@ -2,8 +2,22 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
+@if(gameData?.status == GameStatus.STARTED){
+<div class="game-container">
+  <div class="player-container">
+    <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
+    <div class="trays">
+      <div class="conveyor-belt"></div>
+      <div class="tray-outer">
+        <div class="tray-inner"></div>
+      </div>
+    </div>
+  </div>
+  <div class="other-players-container"></div>
+</div>
+} @else {
 <div class="container">
-  <p>play-game works! {{ gameId }}</p>
+  <p>Welcome! Share this game ID with friends so they can join: {{ gameId }}</p>
   <button mat-button (click)="this.startGame()">Start Game</button>
   <div class="icons-container">
     @for(player of playerData; track player ){
@@ -19,3 +33,4 @@
     }
   </div>
 </div>
+}

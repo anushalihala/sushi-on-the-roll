@@ -3,7 +3,7 @@ import { Unsubscribe } from 'firebase/firestore';
 import { GameService } from '../../game.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GameData, PlayerData } from '../../models';
+import { GameData, GameStatus, PlayerData } from '../../models';
 
 @Component({
   selector: 'app-play-game',
@@ -19,6 +19,7 @@ export class PlayGameComponent {
   unsubscribeFromGamePlayers: Unsubscribe;
   gameData: GameData | null = null;
   playerData: PlayerData[] | null = null;
+  readonly GameStatus: typeof GameStatus = GameStatus;
 
   @Input() set gameid(value: string) {
     this.gameId = value;

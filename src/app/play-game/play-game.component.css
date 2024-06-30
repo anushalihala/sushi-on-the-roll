@@ -25,3 +25,61 @@ div.container {
   justify-content: center;
   gap: 8px;
 }
+
+.game-container {
+  display: flex;
+  height: 100%;
+}
+
+.player-container {
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 65%;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.player-container img {
+  width: 300px;
+}
+
+.player-container .trays {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-container .conveyor-belt {
+  width: 300px;
+  height: 150px;
+  border: 1px solid black;
+  background-image: url("/assets/conveyorbelt.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.player-container .tray-outer {
+  width: 300px;
+  height: 150px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-container .tray-outer .tray-inner {
+  background-color: rgb(143, 43, 43);
+  border: 5px solid rgb(233, 62, 62);
+  border-radius: 8px;
+  width: 92%;
+  height: 84%;
+}
+
+.other-players-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 35%;
+}
