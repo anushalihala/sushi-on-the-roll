@@ -16,7 +16,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-config.json';
-import { GameStatus } from './models';
+import { BagOfDice, GameStatus } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -112,6 +112,30 @@ export class GameService {
 
     if (allTrue) {
       await updateDoc(this.game, { status: GameStatus.STARTED });
+
+      const bag = new BagOfDice();
+      const USER_TO_DICE_COUNT = { 2: 8, 3: 7, 4: 6, 5: 5 };
+      const userCount = docsSnapshot.size;
+      const diceCount =
+        USER_TO_DICE_COUNT[userCount as keyof typeof USER_TO_DICE_COUNT];
+
+      docsSnapshot.forEach(async (currDoc) => {
+        const currPlayerRef = doc(
+          this.game as DocumentReference,
+          'players',
+          currDoc.id
+        );
+        const diceCollection = [];
+        for (let i = 0; i < diceCount; i++) {
+          const newDice = bag.takeDice();
+          newDice.diceRoll();
+          diceCollection.push(newDice);
+        }
+        await updateDoc(currPlayerRef, {
+          conveyorBelt: diceCollection,
+          tray: [],
+        });
+      });
     }
   }
 }
