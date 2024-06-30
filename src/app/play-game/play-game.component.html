@@ -2,20 +2,23 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
-@if(gameData?.status == GameStatus.STARTED){
+@if(!!gameData){ @if(gameData.status == GameStatus.STARTED){
+@if(!!myPlayerData){
 <div class="game-container">
   <div class="player-container">
     <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
     <div class="trays">
       <div class="conveyor-belt-container"></div>
       <div class="tray-outer-container">
-        <div class="tray-inner-container"></div>
+        <div class="tray-inner-container">
+          <app-tray [diceDocs]="myPlayerData.conveyorBelt"></app-tray>
+        </div>
       </div>
     </div>
   </div>
   <div class="other-players-container"></div>
 </div>
-} @else {
+} } @else {
 <div class="container">
   <p>Welcome! Share this game ID with friends so they can join: {{ gameId }}</p>
   <button mat-button (click)="this.startGame()">Start Game</button>
@@ -33,4 +36,4 @@
     }
   </div>
 </div>
-}
+} }

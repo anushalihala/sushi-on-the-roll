@@ -1,0 +1,7 @@
+.dice-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  row-gap: 2px;
+  justify-content: center;
+}

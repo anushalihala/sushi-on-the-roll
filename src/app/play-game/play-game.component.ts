@@ -5,11 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GameData, GameStatus, PlayerData } from '../../models';
 import { Router } from '@angular/router';
+import { TrayComponent } from '../tray/tray.component';
 
 @Component({
   selector: 'app-play-game',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, TrayComponent],
   templateUrl: './play-game.component.html',
   styleUrl: './play-game.component.css',
 })
@@ -17,8 +18,9 @@ export class PlayGameComponent implements OnInit, OnDestroy {
   gameService = inject(GameService);
   unsubscribeFromGame: Unsubscribe | null = null;
   unsubscribeFromGamePlayers: Unsubscribe | null = null;
-  gameData: GameData | null = null;
-  playerData: PlayerData[] | null = null;
+  gameData!: GameData;
+  playerData!: PlayerData[];
+  myPlayerData!: PlayerData;
   readonly GameStatus: typeof GameStatus = GameStatus;
 
   @Input() gameId!: string;
@@ -45,6 +47,9 @@ export class PlayGameComponent implements OnInit, OnDestroy {
         });
         console.log(playerDocs);
         this.playerData = playerDocs;
+        this.myPlayerData = this.playerData.find(
+          (p) => p.playerId === this.gameService.getPlayerId()
+        ) as PlayerData;
       }
     );
   }

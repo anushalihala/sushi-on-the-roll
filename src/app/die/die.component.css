@@ -1,0 +1,93 @@
+.die {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 12px;
+  background-position: center;
+  background-size: 55px;
+  background-repeat: no-repeat;
+}
+
+.nigiri {
+  background-color: rgba(255, 255, 255, 0.839);
+}
+
+.nigiri.egg {
+  background-image: url("/assets/egg.png");
+}
+
+.nigiri.salmon {
+  background-image: url("/assets/salmon.png");
+}
+
+.nigiri.squid {
+  background-image: url("/assets/squid.png");
+}
+
+.pudding {
+  background-color: rgb(232, 209, 225);
+}
+
+.pudding.one {
+  background-image: url("/assets/pudding1.png");
+}
+
+.pudding.two {
+  background-image: url("/assets/pudding2.png");
+}
+
+.pudding.three {
+  background-image: url("/assets/pudding3.png");
+}
+
+.appetizer {
+  background-color: rgb(15, 15, 143);
+}
+
+.appetizer.dumpling {
+  background-image: url("/assets/dumpling.png");
+}
+
+.appetizer.tempura {
+  background-image: url("/assets/tempura.png");
+}
+
+.appetizer.sashimi {
+  background-image: url("/assets/sashimi.png");
+}
+
+.maki {
+  background-color: rgb(210, 85, 85);
+}
+
+.maki.one {
+  background-image: url("/assets/maki1.png");
+}
+
+.maki.two {
+  background-image: url("/assets/maki2.png");
+}
+
+.maki.three {
+  background-image: url("/assets/maki3.png");
+}
+
+.special {
+  background-color: rgb(23, 136, 113);
+}
+
+.special.wasabi {
+  background-image: url("/assets/wasabi.png");
+}
+
+.special.menus {
+  background-image: url("/assets/menus.png");
+}
+
+.special.chopstick {
+  background-image: url("/assets/chopstick.png");
+}
+
+.special.chopsticks {
+  background-image: url("/assets/chopsticks.png");
+}

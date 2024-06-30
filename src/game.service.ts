@@ -17,6 +17,7 @@ import {
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-config.json';
 import { BagOfDice, GameStatus } from './models';
+import { diceToDoc } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,12 @@ export class GameService {
     const newPlayerRef = doc(
       collection(this.db, 'games', newGameRef.id, 'players')
     );
-    await setDoc(newPlayerRef, { playerName, startGame: false });
+    await setDoc(newPlayerRef, {
+      playerName,
+      playerId: newPlayerRef.id,
+      startGame: false,
+      leader: true,
+    });
     this.game = newGameRef;
     this.player = newPlayerRef;
     this.saveToLocalStorage(newPlayerRef.id, newGameRef.id);
@@ -59,7 +65,12 @@ export class GameService {
       return 'Game is full';
     }
     const newPlayerRef = doc(collection(this.db, 'games', gameId, 'players'));
-    await setDoc(newPlayerRef, { playerName, startGame: false });
+    await setDoc(newPlayerRef, {
+      playerName,
+      playerId: newPlayerRef.id,
+      startGame: false,
+      leader: false,
+    });
     await updateDoc(gameRef, { playerCount: increment(1) });
     this.game = gameRef;
     this.player = newPlayerRef;
@@ -117,6 +128,12 @@ export class GameService {
     }
     return this.game.id;
   }
+  getPlayerId(): string {
+    if (this.game == null || this.player == null) {
+      throw Error('User has not joined a game');
+    }
+    return this.player.id;
+  }
 
   isGameNull() {
     return this.game == null;
@@ -164,11 +181,10 @@ export class GameService {
         const diceCollection = [];
         for (let i = 0; i < diceCount; i++) {
           const newDice = bag.takeDice();
-          newDice.diceRoll();
           diceCollection.push(newDice);
         }
         await updateDoc(currPlayerRef, {
-          conveyorBelt: diceCollection,
+          conveyorBelt: diceCollection.map((d) => diceToDoc(d)),
           tray: [],
         });
       });
