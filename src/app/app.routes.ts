@@ -4,7 +4,7 @@ import { PlayGameComponent } from './play-game/play-game.component';
 
 export const routes: Routes = [
   {
-    path: ':gameid',
+    path: ':gameId',
     component: PlayGameComponent,
   },
   {

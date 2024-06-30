@@ -42,6 +42,7 @@ export class GameService {
     await setDoc(newPlayerRef, { playerName, startGame: false });
     this.game = newGameRef;
     this.player = newPlayerRef;
+    this.saveToLocalStorage(newPlayerRef.id, newGameRef.id);
     return true;
   }
 
@@ -62,6 +63,37 @@ export class GameService {
     await updateDoc(gameRef, { playerCount: increment(1) });
     this.game = gameRef;
     this.player = newPlayerRef;
+    this.saveToLocalStorage(newPlayerRef.id, gameRef.id);
+    return true;
+  }
+
+  saveToLocalStorage(playerId: string, gameId: string) {
+    let localStorageObj: null | object | string =
+      localStorage.getItem('sushi-on-the-roll');
+    if (localStorageObj == null) {
+      localStorageObj = {};
+    } else {
+      localStorageObj = JSON.parse(localStorageObj as string);
+    }
+    localStorage.setItem(
+      'sushi-on-the-roll',
+      JSON.stringify({ ...(localStorageObj as object), [gameId]: playerId })
+    );
+  }
+
+  initializeFromLocalStorage(gameId: string) {
+    let localStorageObj: null | object | string =
+      localStorage.getItem('sushi-on-the-roll');
+    if (localStorageObj == null) {
+      return 'You have not joined any games';
+    }
+    localStorageObj = JSON.parse(localStorageObj as string) as object;
+    const playerId = localStorageObj[gameId as keyof typeof localStorageObj];
+    if (playerId == null) {
+      return 'You have not joined this particular game';
+    }
+    this.game = doc(this.db, 'games', gameId);
+    this.player = doc(this.db, 'games', gameId, 'players', playerId);
     return true;
   }
 
@@ -84,6 +116,10 @@ export class GameService {
       throw Error('User has not joined a game');
     }
     return this.game.id;
+  }
+
+  isGameNull() {
+    return this.game == null;
   }
 
   async startGameForPlayer() {

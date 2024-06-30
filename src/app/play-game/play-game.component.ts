@@ -1,9 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { Unsubscribe } from 'firebase/firestore';
 import { GameService } from '../../game.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GameData, GameStatus, PlayerData } from '../../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-play-game',
@@ -12,20 +13,26 @@ import { GameData, GameStatus, PlayerData } from '../../models';
   templateUrl: './play-game.component.html',
   styleUrl: './play-game.component.css',
 })
-export class PlayGameComponent {
-  gameId: string = '';
+export class PlayGameComponent implements OnInit, OnDestroy {
   gameService = inject(GameService);
-  unsubscribeFromGame: Unsubscribe;
-  unsubscribeFromGamePlayers: Unsubscribe;
+  unsubscribeFromGame: Unsubscribe | null = null;
+  unsubscribeFromGamePlayers: Unsubscribe | null = null;
   gameData: GameData | null = null;
   playerData: PlayerData[] | null = null;
   readonly GameStatus: typeof GameStatus = GameStatus;
 
-  @Input() set gameid(value: string) {
-    this.gameId = value;
-  }
+  @Input() gameId!: string;
 
-  constructor(private snackBar: MatSnackBar) {
+  ngOnInit() {
+    if (this.gameService.isGameNull()) {
+      const result = this.gameService.initializeFromLocalStorage(this.gameId);
+      if (result !== true) {
+        this.snackBar.open(result, 'OK', {
+          duration: 4000,
+        });
+        this.router.navigate(['']);
+      }
+    }
     this.unsubscribeFromGame = this.gameService.trackGame((gameSnap) => {
       console.log(gameSnap.data());
       this.gameData = gameSnap.data() as GameData;
@@ -42,9 +49,11 @@ export class PlayGameComponent {
     );
   }
 
+  constructor(private snackBar: MatSnackBar, private router: Router) {}
+
   ngOnDestroy(): void {
-    this.unsubscribeFromGame();
-    this.unsubscribeFromGamePlayers();
+    this.unsubscribeFromGame?.();
+    this.unsubscribeFromGamePlayers?.();
   }
 
   startGame() {
