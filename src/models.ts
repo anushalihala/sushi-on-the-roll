@@ -28,6 +28,13 @@ export interface DiceDoc {
   id: string;
 }
 
+export interface DiceDocPartial {
+  diceValue?: DiceValues;
+  diceFace?: number;
+  diceType: string;
+  id: string;
+}
+
 export class Dice {
   static 0: number;
   static 1: number;
@@ -35,18 +42,21 @@ export class Dice {
   static 3: number;
   static 4: number;
   static 5: number;
-  value!: DiceValues;
-  face!: number;
-  id: string;
 
-  constructor() {
-    this.id = Math.random().toString(36).slice(2, 9);
-    this.diceRoll();
+  static newDice(diceType: string) {
+    const id = Math.random().toString(36).slice(2, 9);
+    return Dice.rollDice({ diceType, id });
   }
 
-  diceRoll() {
-    this.value = Math.floor(Math.random() * 6) as DiceValues;
-    this.face = (this.constructor as typeof Dice)[this.value] as number;
+  static rollDice(doc: DiceDocPartial): DiceDoc {
+    const value = Math.floor(Math.random() * 6) as DiceValues;
+    const cls = eval(doc.diceType);
+    const face = cls[value];
+    return {
+      ...doc,
+      diceValue: value,
+      diceFace: face,
+    };
   }
 
   getDiceType(): string {
@@ -136,28 +146,28 @@ export class SpecialDice extends Dice {
 }
 
 export class BagOfDice {
-  private dices: Dice[] = [];
+  private diceDocs: DiceDoc[] = [];
 
   constructor() {
     for (let i = 0; i < 10; i++) {
-      this.dices.push(new AppetizerDice());
+      this.diceDocs.push(Dice.newDice('AppetizerDice'));
     }
     for (let i = 0; i < 6; i++) {
-      this.dices.push(new MakiDice());
+      this.diceDocs.push(Dice.newDice('MakiDice'));
     }
     for (let i = 0; i < 5; i++) {
-      this.dices.push(new NigiriDice());
+      this.diceDocs.push(Dice.newDice('NigiriDice'));
     }
     for (let i = 0; i < 5; i++) {
-      this.dices.push(new SpecialDice());
+      this.diceDocs.push(Dice.newDice('SpecialDice'));
     }
     for (let i = 0; i < 4; i++) {
-      this.dices.push(new PuddingDice());
+      this.diceDocs.push(Dice.newDice('PuddingDice'));
     }
   }
 
   takeDice() {
-    const index = Math.floor(Math.random() * this.dices.length);
-    return this.dices.splice(index, 1)[0];
+    const index = Math.floor(Math.random() * this.diceDocs.length);
+    return this.diceDocs.splice(index, 1)[0];
   }
 }

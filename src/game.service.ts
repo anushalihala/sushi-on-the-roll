@@ -16,8 +16,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-config.json';
-import { BagOfDice, GameStatus } from './models';
-import { diceToDoc } from './utils';
+import { BagOfDice, DiceDoc, GameStatus } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -178,13 +177,13 @@ export class GameService {
           'players',
           currDoc.id
         );
-        const diceCollection = [];
+        const diceCollection: DiceDoc[] = [];
         for (let i = 0; i < diceCount; i++) {
           const newDice = bag.takeDice();
           diceCollection.push(newDice);
         }
         await updateDoc(currPlayerRef, {
-          conveyorBelt: diceCollection.map((d) => diceToDoc(d)),
+          conveyorBelt: diceCollection,
           tray: [],
         });
       });
