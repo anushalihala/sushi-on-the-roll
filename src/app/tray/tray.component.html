@@ -1,5 +1,5 @@
 <div class="dice-tray">
   @for(diceDoc of diceDocs ; track diceDoc ){
-  <app-die [diceDoc]="diceDoc"></app-die>
+  <app-die [diceDoc]="diceDoc" (click)="diceClick.emit(diceDoc)"></app-die>
   }
 </div>

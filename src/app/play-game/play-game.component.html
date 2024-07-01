@@ -8,10 +8,14 @@
   <div class="player-container">
     <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
     <div class="trays">
-      <div class="conveyor-belt-container"></div>
+      <div class="conveyor-belt-container">
+        <app-conveyor-belt
+          [diceDocs]="myPlayerData.conveyorBelt"
+        ></app-conveyor-belt>
+      </div>
       <div class="tray-outer-container">
         <div class="tray-inner-container">
-          <app-tray [diceDocs]="myPlayerData.conveyorBelt"></app-tray>
+          <app-tray [diceDocs]="myPlayerData.tray"></app-tray>
         </div>
       </div>
     </div>

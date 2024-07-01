@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DiceDoc } from '../../models';
 import { DieComponent } from '../die/die.component';
 
@@ -11,4 +11,5 @@ import { DieComponent } from '../die/die.component';
 })
 export class TrayComponent {
   @Input() diceDocs!: DiceDoc[];
+  @Output() diceClick = new EventEmitter<DiceDoc>();
 }

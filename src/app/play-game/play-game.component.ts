@@ -6,11 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GameData, GameStatus, PlayerData } from '../../models';
 import { Router } from '@angular/router';
 import { TrayComponent } from '../tray/tray.component';
+import { ConveyorBeltComponent } from '../conveyor-belt/conveyor-belt.component';
 
 @Component({
   selector: 'app-play-game',
   standalone: true,
-  imports: [MatButtonModule, TrayComponent],
+  imports: [MatButtonModule, TrayComponent, ConveyorBeltComponent],
   templateUrl: './play-game.component.html',
   styleUrl: './play-game.component.css',
 })

@@ -59,6 +59,8 @@ div.container {
   background-image: url("/assets/conveyorbelt.png");
   background-position: center;
   background-size: cover;
+  display: flex;
+  align-items: center;
 }
 
 .tray-outer-container {

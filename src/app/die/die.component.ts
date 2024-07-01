@@ -13,7 +13,6 @@ export class DieComponent implements OnInit {
   dieClass!: string;
 
   ngOnInit(): void {
-    console.log(this.diceDoc);
     const cls = eval(this.diceDoc.diceType);
     this.dieClass = `die ${this.diceDoc.diceType
       .slice(0, -4)
