@@ -7,11 +7,17 @@ import { DiceDoc, GameData, GameStatus, PlayerData } from '../../models';
 import { Router } from '@angular/router';
 import { TrayComponent } from '../tray/tray.component';
 import { ConveyorBeltComponent } from '../conveyor-belt/conveyor-belt.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-play-game',
   standalone: true,
-  imports: [MatButtonModule, TrayComponent, ConveyorBeltComponent],
+  imports: [
+    MatButtonModule,
+    TrayComponent,
+    ConveyorBeltComponent,
+    CommonModule,
+  ],
   templateUrl: './play-game.component.html',
   styleUrl: './play-game.component.css',
 })
@@ -73,7 +79,9 @@ export class PlayGameComponent implements OnInit, OnDestroy {
   }
 
   myDiceClick(diceDoc: DiceDoc) {
-    console.log('diceclick', diceDoc);
+    if (this.myPlayerData.myTurn) {
+      this.gameService.pickDice(diceDoc);
+    }
   }
 
   otherDiceClick(diceDoc: DiceDoc) {

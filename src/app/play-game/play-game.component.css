@@ -31,11 +31,24 @@ div.container {
   height: 100%;
 }
 
+.turn-statement {
+  font-weight: 500;
+  color: brown;
+}
+
 .player-container {
   border-right: 1px solid black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex: 1 0 65%;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.player-sub-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 24px;
@@ -50,6 +63,10 @@ div.container {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+}
+
+.red-border {
+  border: 5px solid rgb(210, 57, 57) !important;
 }
 
 .conveyor-belt-container {
@@ -80,10 +97,67 @@ div.container {
   height: 84%;
 }
 
+.my-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 48px;
+  box-sizing: border-box;
+}
+
+.other-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 310px;
+  gap: 40px;
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.token {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.menu-t {
+  background-image: url("/assets/re-roll-token.png");
+}
+
+.chopsticks-t {
+  background-image: url("/assets/swap-token.png");
+}
+
+.pudding-t {
+  background-image: url("/assets/pudding-token.png");
+}
+
+.points {
+  font-weight: 500;
+}
+
 .other-players-container {
   display: flex;
   flex-direction: column;
   flex: 1 0 35%;
   gap: 24px;
   overflow-y: scroll;
+}
+
+.other-player-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-around;
+  padding: 0 24px;
 }

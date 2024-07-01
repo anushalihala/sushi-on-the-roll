@@ -6,34 +6,92 @@
 @if(!!myPlayerData){
 <div class="game-container">
   <div class="player-container">
-    <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
-    <div class="trays">
-      <div class="conveyor-belt-container">
-        <app-tray
-          [diceDocs]="myPlayerData.conveyorBelt"
-          (diceClick)="myDiceClick($event)"
-        ></app-tray>
-      </div>
-      <div class="tray-outer-container">
-        <div class="tray-inner-container">
-          <app-tray [diceDocs]="myPlayerData.tray"></app-tray>
+    <div class="player-sub-container">
+      <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
+      <div class="trays">
+        @if(myPlayerData.myTurn){
+        <p class="turn-statement">Player's Turn</p>
+        }
+        <div
+          [ngClass]="
+            myPlayerData.roundStarter
+              ? 'conveyor-belt-container red-border'
+              : 'conveyor-belt-container'
+          "
+        >
+          <app-tray
+            [diceDocs]="myPlayerData.conveyorBelt"
+            (diceClick)="myDiceClick($event)"
+          ></app-tray>
         </div>
+        <div class="tray-outer-container">
+          <div class="tray-inner-container">
+            <app-tray [diceDocs]="myPlayerData.tray"></app-tray>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="my-stats">
+      <div class="stat-container">
+        <div class="menu-t token"></div>
+        <div>{{ myPlayerData.menus }}</div>
+      </div>
+      <div class="stat-container">
+        <div class="chopsticks-t token"></div>
+        <div>{{ myPlayerData.chopsticks }}</div>
+      </div>
+      <div class="stat-container">
+        <div class="pudding-t token"></div>
+        <div>{{ myPlayerData.pudding }}</div>
+      </div>
+      <div class="stat-container">
+        <div class="points">Points:</div>
+        <div>{{ myPlayerData.points }}</div>
       </div>
     </div>
   </div>
   <div class="other-players-container">
     @for(player of playerData; track player ){
     @if(player.playerId!=myPlayerData.playerId){
-    <div class="trays">
-      <div class="conveyor-belt-container">
-        <app-tray
-          [diceDocs]="player.conveyorBelt"
-          (diceClick)="otherDiceClick($event)"
-        ></app-tray>
+    <div class="other-player-container">
+      <div class="trays">
+        <div
+          [ngClass]="
+            player.roundStarter
+              ? 'conveyor-belt-container red-border'
+              : 'conveyor-belt-container'
+          "
+        >
+          <app-tray
+            [diceDocs]="player.conveyorBelt"
+            (diceClick)="otherDiceClick($event)"
+          ></app-tray>
+        </div>
+        <div class="tray-outer-container">
+          <div class="tray-inner-container">
+            <app-tray [diceDocs]="player.tray"></app-tray>
+          </div>
+        </div>
+        @if(player.myTurn){
+        <p class="turn-statement">Player's Turn</p>
+        }
       </div>
-      <div class="tray-outer-container">
-        <div class="tray-inner-container">
-          <app-tray [diceDocs]="player.tray"></app-tray>
+      <div class="other-stats">
+        <div class="stat-container">
+          <div class="menu-t token"></div>
+          <div>{{ player.menus }}</div>
+        </div>
+        <div class="stat-container">
+          <div class="chopsticks-t token"></div>
+          <div>{{ player.chopsticks }}</div>
+        </div>
+        <div class="stat-container">
+          <div class="pudding-t token"></div>
+          <div>{{ player.pudding }}</div>
+        </div>
+        <div class="stat-container">
+          <div class="points">Points:</div>
+          <div>{{ player.points }}</div>
         </div>
       </div>
     </div>

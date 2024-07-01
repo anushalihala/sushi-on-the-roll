@@ -8,15 +8,24 @@ export enum GameStatus {
 export interface GameData {
   status: GameStatus;
   playerCount: number;
+  round: number;
+  winner: string | undefined;
 }
 
 export interface PlayerData {
   playerName: string;
   playerId: string;
   startGame: boolean;
-  leader: boolean;
+  roundStarter: boolean;
+  myTurn: boolean;
   conveyorBelt: DiceDoc[];
   tray: DiceDoc[];
+  chopsticks: number;
+  menus: number;
+  freeWasabis: number;
+  pudding: number;
+  points: number;
+  maki: number;
 }
 
 type DiceValues = 0 | 1 | 2 | 3 | 4 | 5;
@@ -65,9 +74,9 @@ export class Dice {
 }
 
 enum NigiriFace {
-  SALMON,
-  EGG,
-  SQUID,
+  EGG = 1,
+  SALMON = 2,
+  SQUID = 3,
 }
 
 export class NigiriDice extends Dice {
@@ -81,9 +90,9 @@ export class NigiriDice extends Dice {
 }
 
 enum PuddingFace {
-  ONE,
-  TWO,
-  THREE,
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
 }
 
 export class PuddingDice extends Dice {
@@ -96,7 +105,7 @@ export class PuddingDice extends Dice {
   static myEnum = PuddingFace;
 }
 
-enum AppetizerFace {
+export enum AppetizerFace {
   DUMPLING,
   TEMPURA,
   SASHIMI,
@@ -113,9 +122,9 @@ export class AppetizerDice extends Dice {
 }
 
 enum MakiFace {
-  ONE,
-  TWO,
-  THREE,
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
 }
 
 export class MakiDice extends Dice {
@@ -128,7 +137,7 @@ export class MakiDice extends Dice {
   static myEnum = MakiFace;
 }
 
-enum SpecialFace {
+export enum SpecialFace {
   WASABI,
   MENUS,
   CHOPSTICK,
