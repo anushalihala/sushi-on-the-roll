@@ -3,7 +3,7 @@ import { Unsubscribe } from 'firebase/firestore';
 import { GameService } from '../../game.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GameData, GameStatus, PlayerData } from '../../models';
+import { DiceDoc, GameData, GameStatus, PlayerData } from '../../models';
 import { Router } from '@angular/router';
 import { TrayComponent } from '../tray/tray.component';
 import { ConveyorBeltComponent } from '../conveyor-belt/conveyor-belt.component';
@@ -70,5 +70,13 @@ export class PlayGameComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  myDiceClick(diceDoc: DiceDoc) {
+    console.log('diceclick', diceDoc);
+  }
+
+  otherDiceClick(diceDoc: DiceDoc) {
+    console.log('otherdiceclick', diceDoc);
   }
 }

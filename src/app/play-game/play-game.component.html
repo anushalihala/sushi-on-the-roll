@@ -9,9 +9,10 @@
     <img src="/assets/cheatsheet.png" alt="Points Cheatsheet" />
     <div class="trays">
       <div class="conveyor-belt-container">
-        <app-conveyor-belt
+        <app-tray
           [diceDocs]="myPlayerData.conveyorBelt"
-        ></app-conveyor-belt>
+          (diceClick)="myDiceClick($event)"
+        ></app-tray>
       </div>
       <div class="tray-outer-container">
         <div class="tray-inner-container">
@@ -20,7 +21,24 @@
       </div>
     </div>
   </div>
-  <div class="other-players-container"></div>
+  <div class="other-players-container">
+    @for(player of playerData; track player ){
+    @if(player.playerId!=myPlayerData.playerId){
+    <div class="trays">
+      <div class="conveyor-belt-container">
+        <app-tray
+          [diceDocs]="player.conveyorBelt"
+          (diceClick)="otherDiceClick($event)"
+        ></app-tray>
+      </div>
+      <div class="tray-outer-container">
+        <div class="tray-inner-container">
+          <app-tray [diceDocs]="player.tray"></app-tray>
+        </div>
+      </div>
+    </div>
+    } }
+  </div>
 </div>
 } } @else {
 <div class="container">

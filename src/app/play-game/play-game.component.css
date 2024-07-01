@@ -84,4 +84,6 @@ div.container {
   display: flex;
   flex-direction: column;
   flex: 1 0 35%;
+  gap: 24px;
+  overflow-y: scroll;
 }
