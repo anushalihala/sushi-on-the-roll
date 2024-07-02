@@ -53,7 +53,6 @@ export class PlayGameComponent implements OnInit, OnDestroy {
       }
     }
     this.unsubscribeFromGame = this.gameService.trackGame((gameSnap) => {
-      console.log(gameSnap.data());
       this.gameData = gameSnap.data() as GameData;
     });
     this.unsubscribeFromGamePlayers = this.gameService.trackGamePlayers(
@@ -62,7 +61,6 @@ export class PlayGameComponent implements OnInit, OnDestroy {
         gamePlayersSnap.forEach((doc) => {
           playerDocs.push(doc.data() as PlayerData);
         });
-        console.log(playerDocs);
         this.playerData = playerDocs;
         this.myPlayerData = this.playerData.find(
           (p) => p.playerId === this.gameService.getPlayerId()
