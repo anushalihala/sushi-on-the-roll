@@ -17,15 +17,15 @@
 }
 
 .nigiri.egg {
-  background-image: url("./assets/egg.png");
+  background-image: url("../../assets/egg.png");
 }
 
 .nigiri.salmon {
-  background-image: url("./assets/salmon.png");
+  background-image: url("../../assets/salmon.png");
 }
 
 .nigiri.squid {
-  background-image: url("./assets/squid.png");
+  background-image: url("../../assets/squid.png");
 }
 
 .pudding {
@@ -33,15 +33,15 @@
 }
 
 .pudding.one {
-  background-image: url("./assets/pudding1.png");
+  background-image: url("../../assets/pudding1.png");
 }
 
 .pudding.two {
-  background-image: url("./assets/pudding2.png");
+  background-image: url("../../assets/pudding2.png");
 }
 
 .pudding.three {
-  background-image: url("./assets/pudding3.png");
+  background-image: url("../../assets/pudding3.png");
 }
 
 .appetizer {
@@ -49,15 +49,15 @@
 }
 
 .appetizer.dumpling {
-  background-image: url("./assets/dumpling.png");
+  background-image: url("../../assets/dumpling.png");
 }
 
 .appetizer.tempura {
-  background-image: url("./assets/tempura.png");
+  background-image: url("../../assets/tempura.png");
 }
 
 .appetizer.sashimi {
-  background-image: url("./assets/sashimi.png");
+  background-image: url("../../assets/sashimi.png");
 }
 
 .maki {
@@ -65,15 +65,15 @@
 }
 
 .maki.one {
-  background-image: url("./assets/maki1.png");
+  background-image: url("../../assets/maki1.png");
 }
 
 .maki.two {
-  background-image: url("./assets/maki2.png");
+  background-image: url("../../assets/maki2.png");
 }
 
 .maki.three {
-  background-image: url("./assets/maki3.png");
+  background-image: url("../../assets/maki3.png");
 }
 
 .special {
@@ -81,17 +81,17 @@
 }
 
 .special.wasabi {
-  background-image: url("./assets/wasabi.png");
+  background-image: url("../../assets/wasabi.png");
 }
 
 .special.menus {
-  background-image: url("./assets/menus.png");
+  background-image: url("../../assets/menus.png");
 }
 
 .special.chopstick {
-  background-image: url("./assets/chopstick.png");
+  background-image: url("../../assets/chopstick.png");
 }
 
 .special.chopsticks {
-  background-image: url("./assets/chopsticks.png");
+  background-image: url("../../assets/chopsticks.png");
 }

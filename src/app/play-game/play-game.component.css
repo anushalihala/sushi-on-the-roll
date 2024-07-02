@@ -61,8 +61,13 @@ div.container {
   gap: 24px;
 }
 
-.player-container img {
+.player-container .cheatsheet {
   width: 300px;
+  height: 400px;
+  background-image: url("../../assets/cheatsheet.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .trays {
@@ -80,7 +85,7 @@ div.container {
   width: 300px;
   height: 150px;
   border: 1px solid black;
-  background-image: url("./assets/conveyorbelt.png");
+  background-image: url("../../assets/conveyorbelt.png");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -142,15 +147,15 @@ div.container {
 }
 
 .menu-t {
-  background-image: url("./assets/re-roll-token.png");
+  background-image: url("../../assets/re-roll-token.png");
 }
 
 .chopsticks-t {
-  background-image: url("./assets/swap-token.png");
+  background-image: url("../../assets/swap-token.png");
 }
 
 .pudding-t {
-  background-image: url("./assets/pudding-token.png");
+  background-image: url("../../assets/pudding-token.png");
 }
 
 .points {
