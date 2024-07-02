@@ -17,12 +17,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-play-game',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    TrayComponent,
-    ConveyorBeltComponent,
-    CommonModule,
-  ],
+  imports: [MatButtonModule, TrayComponent, CommonModule],
   templateUrl: './play-game.component.html',
   styleUrl: './play-game.component.css',
 })
