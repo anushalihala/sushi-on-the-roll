@@ -66,8 +66,17 @@ export class Dice {
   }
 
   static rollDice(doc: DiceDocPartial): DiceDoc {
+    const NAMES_TO_CLASS = new Map(
+      Object.entries({
+        NigiriDice,
+        PuddingDice,
+        AppetizerDice,
+        MakiDice,
+        SpecialDice,
+      })
+    );
     const value = Math.floor(Math.random() * 6) as DiceValues;
-    const cls = eval(doc.diceType);
+    const cls = NAMES_TO_CLASS.get(doc.diceType) as any;
     const face = cls[value];
     return {
       ...doc,

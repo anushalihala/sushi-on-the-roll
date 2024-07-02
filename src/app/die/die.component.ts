@@ -1,5 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DiceDoc } from '../../models';
+import {
+  AppetizerDice,
+  Dice,
+  DiceDoc,
+  MakiDice,
+  NigiriDice,
+  PuddingDice,
+  SpecialDice,
+} from '../../models';
 
 @Component({
   selector: 'app-die',
@@ -11,9 +19,18 @@ import { DiceDoc } from '../../models';
 export class DieComponent implements OnInit {
   @Input() diceDoc!: DiceDoc;
   dieClass!: string;
+  NAMES_TO_CLASS = new Map(
+    Object.entries({
+      NigiriDice,
+      PuddingDice,
+      AppetizerDice,
+      MakiDice,
+      SpecialDice,
+    })
+  );
 
   ngOnInit(): void {
-    const cls = eval(this.diceDoc.diceType);
+    const cls = this.NAMES_TO_CLASS.get(this.diceDoc.diceType) as any;
     this.dieClass = `die ${this.diceDoc.diceType
       .slice(0, -4)
       .toLowerCase()} ${cls.myEnum[this.diceDoc.diceFace].toLowerCase()}`;
