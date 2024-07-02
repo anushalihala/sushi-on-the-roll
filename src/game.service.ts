@@ -39,6 +39,8 @@ const playerStarterData = {
   maki: 0,
 };
 
+const MAX_ROUNDS = 3;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -320,12 +322,13 @@ export class GameService {
     const gameDoc: GameData = (
       await getDoc(this.game)
     ).data() as unknown as GameData;
-    if (gameDoc.round >= 3) {
-      await this.endGame();
-    } else if (
+    if (
       docsSnapshot.docs.every((doc) => doc.data()['conveyorBelt'].length == 0)
     ) {
       await this.nextRound();
+      if (gameDoc.round >= MAX_ROUNDS) {
+        await this.endGame();
+      }
     }
   }
 
@@ -421,6 +424,43 @@ export class GameService {
     await updateDoc(this.game, {
       status: GameStatus.FINISHED,
       winner: winnerName,
+    });
+  }
+
+  async reRoll(conveyorBeltSelections: DiceDoc[]) {
+    if (this.player == null) {
+      throw Error('User has not joined a game');
+    }
+    await updateDoc(this.player, {
+      conveyorBelt: conveyorBeltSelections.map((dice) =>
+        dice.selected ? Dice.rollDice({ ...dice, selected: false }) : dice
+      ),
+      menus: increment(-1),
+    });
+  }
+
+  async swap(
+    mySelectedDice: DiceDoc,
+    otherPlayerId: string,
+    otherPlayerSelectedDice: DiceDoc
+  ) {
+    if (this.game == null || this.player == null) {
+      throw Error('User has not joined a game');
+    }
+    mySelectedDice = { ...mySelectedDice, selected: false };
+    otherPlayerSelectedDice = { ...otherPlayerSelectedDice, selected: false };
+    await updateDoc(this.player, {
+      conveyorBelt: arrayRemove(mySelectedDice),
+      chopsticks: increment(-1),
+    });
+    await updateDoc(this.player, {
+      conveyorBelt: arrayUnion(otherPlayerSelectedDice),
+    });
+    await updateDoc(doc(this.game, 'players', otherPlayerId), {
+      conveyorBelt: arrayRemove(otherPlayerSelectedDice),
+    });
+    await updateDoc(doc(this.game, 'players', otherPlayerId), {
+      conveyorBelt: arrayUnion(mySelectedDice),
     });
   }
 }

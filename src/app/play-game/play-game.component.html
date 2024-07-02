@@ -11,6 +11,18 @@
       <div class="trays">
         @if(myPlayerData.myTurn){
         <p class="turn-statement">Player's Turn</p>
+        } @if(specialState==SpecialState.REROLL){
+        <button
+          mat-button
+          (click)="this.reRoll()"
+          [disabled]="this.reRollValid()"
+        >
+          RE ROLL
+        </button>
+        } @if(specialState==SpecialState.SWAP){
+        <button mat-button (click)="this.swap()" [disabled]="this.swapValid()">
+          SWAP
+        </button>
         }
         <div
           [ngClass]="
@@ -33,11 +45,25 @@
     </div>
     <div class="my-stats">
       <div class="stat-container">
-        <div class="menu-t token"></div>
+        <div
+          [ngClass]="
+            specialState == SpecialState.REROLL
+              ? 'menu-t token selected'
+              : 'menu-t token'
+          "
+          (click)="enableReroll()"
+        ></div>
         <div>{{ myPlayerData.menus }}</div>
       </div>
       <div class="stat-container">
-        <div class="chopsticks-t token"></div>
+        <div
+          [ngClass]="
+            specialState == SpecialState.SWAP
+              ? 'chopsticks-t token selected'
+              : 'chopsticks-t token'
+          "
+          (click)="enableSwap()"
+        ></div>
         <div>{{ myPlayerData.chopsticks }}</div>
       </div>
       <div class="stat-container">
@@ -64,7 +90,7 @@
         >
           <app-tray
             [diceDocs]="player.conveyorBelt"
-            (diceClick)="otherDiceClick($event)"
+            (diceClick)="otherDiceClick($event, player.playerId)"
           ></app-tray>
         </div>
         <div class="tray-outer-container">
@@ -72,9 +98,12 @@
             <app-tray [diceDocs]="player.tray"></app-tray>
           </div>
         </div>
-        @if(player.myTurn){
-        <p class="turn-statement">Player's Turn</p>
-        }
+        <div class="player-name-container">
+          <div>{{ player.playerName }}</div>
+          @if(player.myTurn){
+          <p class="turn-statement">Player's Turn</p>
+          }
+        </div>
       </div>
       <div class="other-stats">
         <div class="stat-container">
@@ -98,7 +127,7 @@
     } }
   </div>
 </div>
-} } @else {
+} } @else if (gameData.status == GameStatus.CREATED){
 <div class="container">
   <p>Welcome! Share this game ID with friends so they can join: {{ gameId }}</p>
   <button mat-button (click)="this.startGame()">Start Game</button>
@@ -111,6 +140,23 @@
       <div>READY</div>
       } @else {
       <div>WAITING</div>
+      }
+    </div>
+    }
+  </div>
+</div>
+} @else if (gameData.status == GameStatus.FINISHED){
+<div class="container">
+  <p>Congratulations {{ gameData.winner }}!</p>
+  <button mat-button (click)="this.goToJoinGame()">New Game</button>
+  <div class="icons-container">
+    @for(player of playerData; track player ){
+    <div class="icon-container">
+      <div>{{ player.playerName }}</div>
+      <span class="material-symbols-outlined face-icon"> face </span>
+      <div>{{ player.points }}</div>
+      @if(player.playerName==gameData.winner){
+      <div class="winner-label">WINNER</div>
       }
     </div>
     }

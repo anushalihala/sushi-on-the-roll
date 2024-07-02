@@ -1,6 +1,18 @@
 div.header {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+div.header div {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  padding-left: 135px;
+}
+
+div.header a {
+  padding-right: 24px;
 }
 
 h1.game-title {
@@ -11,6 +23,12 @@ h1.game-title {
   background-image: linear-gradient(to left, #6953a6, #e73232);
   background-clip: text;
   -webkit-background-clip: text;
-  background-position: -200%;
   text-transform: uppercase;
+  width: fit-content;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

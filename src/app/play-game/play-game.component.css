@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
@@ -16,6 +22,7 @@ div.container {
   margin-top: 24px;
   display: flex;
   gap: 24px;
+  align-items: start;
 }
 
 .icon-container {
@@ -28,7 +35,7 @@ div.container {
 
 .game-container {
   display: flex;
-  height: 100%;
+  flex: 1 1 auto;
 }
 
 .turn-statement {
@@ -130,6 +137,10 @@ div.container {
   background-repeat: no-repeat;
 }
 
+.token.selected {
+  border: 5px solid rgb(220, 24, 24);
+}
+
 .menu-t {
   background-image: url("/assets/re-roll-token.png");
 }
@@ -150,7 +161,7 @@ div.container {
   display: flex;
   flex-direction: column;
   flex: 1 0 35%;
-  gap: 24px;
+  gap: 36px;
   overflow-y: scroll;
 }
 
@@ -160,4 +171,15 @@ div.container {
   gap: 12px;
   justify-content: space-around;
   padding: 0 24px;
+}
+
+.player-name-container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.winner-label {
+  font-size: 18px;
+  color: rgb(203, 37, 37);
 }

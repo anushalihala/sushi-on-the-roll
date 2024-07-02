@@ -17,5 +17,8 @@ export class DieComponent implements OnInit {
     this.dieClass = `die ${this.diceDoc.diceType
       .slice(0, -4)
       .toLowerCase()} ${cls.myEnum[this.diceDoc.diceFace].toLowerCase()}`;
+    if (this.diceDoc.selected) {
+      this.dieClass += ' selected';
+    }
   }
 }

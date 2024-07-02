@@ -1,3 +1,9 @@
+export enum SpecialState {
+  NONE,
+  REROLL,
+  SWAP,
+}
+
 export enum GameStatus {
   CREATED,
   STARTED,
@@ -35,11 +41,13 @@ export interface DiceDoc {
   diceFace: number;
   diceType: string;
   id: string;
+  selected?: boolean;
 }
 
 export interface DiceDocPartial {
   diceValue?: DiceValues;
   diceFace?: number;
+  selected?: boolean;
   diceType: string;
   id: string;
 }
@@ -54,7 +62,7 @@ export class Dice {
 
   static newDice(diceType: string) {
     const id = Math.random().toString(36).slice(2, 9);
-    return Dice.rollDice({ diceType, id });
+    return Dice.rollDice({ diceType, id, selected: false });
   }
 
   static rollDice(doc: DiceDocPartial): DiceDoc {
