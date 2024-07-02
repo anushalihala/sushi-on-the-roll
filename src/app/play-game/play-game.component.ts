@@ -12,7 +12,6 @@ import {
 } from '../../models';
 import { Router } from '@angular/router';
 import { TrayComponent } from '../tray/tray.component';
-import { ConveyorBeltComponent } from '../conveyor-belt/conveyor-belt.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
