@@ -3,3 +3,8 @@ div.container {
   flex-direction: column;
   align-items: center;
 }
+
+.player-name-container p {
+  padding-right: 8px;
+  display: inline;
+}

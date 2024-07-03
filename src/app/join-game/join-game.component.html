@@ -1,6 +1,7 @@
 <div class="container">
   @if(playerName == ""){
-  <div>
+  <div class="player-name-container">
+    <p>Name</p>
     <input id="player-name" name="player-name" [(ngModel)]="inputPlayerName" />
     <button mat-button (click)="this.setPlayerName()">Next</button>
   </div>
